@@ -2,11 +2,14 @@ import { useState } from "react";
 import SearchForm from "./Components/SearchForm";
 import Header from "./Components/Header";
 function App() {
-  const [weatherData, setWeatherData] = useState(null);
+  const [searchResponseData, setSearchResponseData] = useState(null);
   return (
     <div className='weather-app'>
       <Header />
-      <SearchForm setWeatherData={setWeatherData} weatherData={weatherData} />
+      <SearchForm
+        searchResponseData={searchResponseData}
+        setSearchResponseData={setSearchResponseData}
+      />
     </div>
   );
 }

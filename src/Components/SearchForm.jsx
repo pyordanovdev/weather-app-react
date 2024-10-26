@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Button from "./Button";
-import SearchDropdownCities from "./SearchDropdownCities";
-import { getWeatherDataBySearchInput } from "../Utils/GetWeatherData";
-function SearchForm({ weatherData, setWeatherData }) {
+import SearchDropdownLocations from "./SearchDropdownLocations";
+import { getLocationsDataBySearchInput } from "../Utils/getLocationsDataBySearchInput";
+function SearchForm({ searchResponseData, setSearchResponseData }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -16,8 +16,8 @@ function SearchForm({ weatherData, setWeatherData }) {
           onChange={(e) => setSearchQuery(e.target.value)}
         ></input>
         {isLoading ? <p>Loading, please wait...</p> : ""}
-        {weatherData && !isLoading && (
-          <SearchDropdownCities weatherData={weatherData} />
+        {searchResponseData && !isLoading && (
+          <SearchDropdownLocations searchResponseData={searchResponseData} />
         )}
       </div>
       <Button>Search city</Button>
@@ -29,14 +29,16 @@ function SearchForm({ weatherData, setWeatherData }) {
     if (searchQuery === "") return alert("Please enter a city name");
     setIsLoading(true);
     try {
-      const weatherData = await getWeatherDataBySearchInput(searchQuery);
+      const returnedAPICallData = await getLocationsDataBySearchInput(
+        searchQuery
+      );
 
-      if (weatherData) {
+      if (returnedAPICallData) {
         setTimeout(() => {
-          setWeatherData(weatherData);
+          setSearchResponseData(returnedAPICallData.list);
           setSearchQuery("");
           setIsLoading(false);
-          console.log(weatherData);
+          console.log(returnedAPICallData);
         }, 500);
       }
     } catch (err) {
