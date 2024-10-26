@@ -27,7 +27,7 @@ ol {
   height: 100%;
 }
 .weather-app {
-  background-image: url("bg-1.jpg");
+  background-image: url("./assets/bg-1.jpg");
   height: 100%;
   background-size: cover;
   background-repeat: no-repeat;

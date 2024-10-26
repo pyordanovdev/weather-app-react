@@ -1,6 +1,6 @@
-import getCurrentTime from "../Utils/getCurrentTime";
+import getCurrentHour from "../Utils/getCurrentHour";
 function Header() {
-  const currentHour = getCurrentTime();
+  const currentHour = getCurrentHour();
   let message = "";
   if (currentHour < 12) {
     message = "Good Morning";
