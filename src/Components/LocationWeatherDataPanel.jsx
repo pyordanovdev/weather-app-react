@@ -6,6 +6,7 @@ import {
   FaTemperatureLow,
   FaFan,
 } from "react-icons/fa";
+import LocationMap from "./LocationMap";
 
 function LocationWeatherDataPanel({ locationWeatherData }) {
   const iconStylesObject = {
@@ -72,7 +73,14 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
             </ul>
           </div>
         </div>
-        <div className='col-6'>here goes the map</div>
+        <div className='col-6'>
+          <LocationMap
+            lat={locationWeatherData.coord.lat}
+            long={locationWeatherData.coord.lon}
+            popupText={locationWeatherData.name}
+            zoom={10}
+          />
+        </div>
       </div>
     </div>
   );

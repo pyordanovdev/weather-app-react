@@ -196,3 +196,10 @@ li.single-city-search span {
   align-items: center;
   gap: 10px;
 }
+
+.leaflet-container {
+  height: 100%;
+}
+.leaflet-control-attribution {
+  display: none !important;
+}
