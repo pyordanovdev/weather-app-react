@@ -1,4 +1,5 @@
 import convertKelvinToCelsius from "../Utils/convertKelvinToCelsius";
+import { useEffect, useState } from "react";
 import {
   FaWater,
   FaWind,
@@ -7,12 +8,22 @@ import {
   FaFan,
 } from "react-icons/fa";
 import LocationMap from "./LocationMap";
+import ThreeHourForecastDisplay from "./ThreeHourForecastDisplay";
+import get3HourForecastFor5Days from "../Utils/get3HourForecastFor5Days";
 
 function LocationWeatherDataPanel({ locationWeatherData }) {
+  const [threeHourForecastData, setThreeHourForecastData] = useState(null);
   const iconStylesObject = {
     fontSize: "25px",
     color: "#007bff",
   };
+  useEffect(() => {
+    const fetchedData = get3HourForecastFor5Days(
+      locationWeatherData.coord.lat,
+      locationWeatherData.coord.lon
+    );
+    setThreeHourForecastData(fetchedData);
+  }, []);
   return (
     <div className='location-weather-data-panel current-location'>
       <div className='flex-row'>
@@ -82,6 +93,8 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
           />
         </div>
       </div>
+      <h2>3 hour forecast: 5 days</h2>
+      <ThreeHourForecastDisplay threeHourForecastData={threeHourForecastData} />
     </div>
   );
 }
