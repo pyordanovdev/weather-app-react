@@ -8,22 +8,32 @@ import {
   FaFan,
 } from "react-icons/fa";
 import LocationMap from "./LocationMap";
-import ThreeHourForecastDisplay from "./ThreeHourForecastDisplay";
+import DisplayForecastData from "./DisplayForecastData";
 import get3HourForecastFor5Days from "../Utils/get3HourForecastFor5Days";
+import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsIntoSingleObject";
 
 function LocationWeatherDataPanel({ locationWeatherData }) {
-  const [threeHourForecastData, setThreeHourForecastData] = useState(null);
+  const [fiveDayForecastData, setfiveDayForecastData] = useState(null);
   const iconStylesObject = {
     fontSize: "25px",
     color: "#007bff",
   };
   useEffect(() => {
-    const fetchedData = get3HourForecastFor5Days(
-      locationWeatherData.coord.lat,
-      locationWeatherData.coord.lon
-    );
-    setThreeHourForecastData(fetchedData);
-  }, []);
+    const fetchAndCategorizeData = async () => {
+      const fetchedDataForecast = await get3HourForecastFor5Days(
+        locationWeatherData.coord.lat,
+        locationWeatherData.coord.lon
+      );
+      const categorizedDataItems = await categorizeArrayItemsIntoSingleObject(
+        fetchedDataForecast.list,
+        "dt_txt"
+      );
+      console.log(categorizedDataItems);
+      setfiveDayForecastData(categorizedDataItems);
+    };
+    fetchAndCategorizeData();
+  }, [locationWeatherData.coord.lat, locationWeatherData.coord.lon]);
+
   return (
     <div className='location-weather-data-panel current-location'>
       <div className='flex-row'>
@@ -94,7 +104,9 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
         </div>
       </div>
       <h2>3 hour forecast: 5 days</h2>
-      <ThreeHourForecastDisplay threeHourForecastData={threeHourForecastData} />
+      {fiveDayForecastData && (
+        <DisplayForecastData forecastDataObject={fiveDayForecastData} />
+      )}
     </div>
   );
 }
