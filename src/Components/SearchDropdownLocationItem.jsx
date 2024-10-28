@@ -1,7 +1,21 @@
 import convertKelvinToCelsius from "../Utils/convertKelvinToCelsius";
-function SearchDropdownLocationItem({ searchResponseItem }) {
+function SearchDropdownLocationItem({
+  searchResponseItem,
+  setLocationWeatherData,
+  setSearchResponseData,
+}) {
+  function handleClick(e) {
+    e.preventDefault();
+    setLocationWeatherData(searchResponseItem);
+    setSearchResponseData(null);
+    console.log(searchResponseItem);
+  }
   return (
-    <li className='single-city-search' id={searchResponseItem.id}>
+    <li
+      className='single-city-search'
+      id={searchResponseItem.id}
+      onClick={handleClick}
+    >
       <span className='city-name__single-city-search'>
         {searchResponseItem.name}, {searchResponseItem.sys.country}
         <img
@@ -10,7 +24,7 @@ function SearchDropdownLocationItem({ searchResponseItem }) {
         />
       </span>
       <span className='degrees__single-city-search'>
-        {convertKelvinToCelsius(searchResponseItem.main.temp).toFixed(2)}
+        {convertKelvinToCelsius(searchResponseItem.main.temp).toFixed(0)}
         °C
       </span>
       <span className='weather-icon-state__single-city-search'>

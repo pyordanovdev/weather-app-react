@@ -2,7 +2,11 @@ import { useState } from "react";
 import Button from "./Button";
 import SearchDropdownLocations from "./SearchDropdownLocations";
 import { getLocationsDataBySearchInput } from "../Utils/getLocationsDataBySearchInput";
-function SearchForm({ searchResponseData, setSearchResponseData }) {
+function SearchForm({
+  searchResponseData,
+  setSearchResponseData,
+  setLocationWeatherData,
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -17,7 +21,11 @@ function SearchForm({ searchResponseData, setSearchResponseData }) {
         ></input>
         {isLoading ? <p>Loading, please wait...</p> : ""}
         {searchResponseData && !isLoading && (
-          <SearchDropdownLocations searchResponseData={searchResponseData} />
+          <SearchDropdownLocations
+            setSearchResponseData={setSearchResponseData}
+            searchResponseData={searchResponseData}
+            setLocationWeatherData={setLocationWeatherData}
+          />
         )}
       </div>
       <Button>Search city</Button>

@@ -1,5 +1,9 @@
 import SearchDropdownLocationItem from "./SearchDropdownLocationItem";
-function SearchDropdownLocations({ searchResponseData }) {
+function SearchDropdownLocations({
+  searchResponseData,
+  setLocationWeatherData,
+  setSearchResponseData,
+}) {
   return (
     <ul className='search-dropdown-menu'>
       {searchResponseData &&
@@ -8,6 +12,8 @@ function SearchDropdownLocations({ searchResponseData }) {
             <SearchDropdownLocationItem
               searchResponseItem={item}
               key={item.id}
+              setLocationWeatherData={setLocationWeatherData}
+              setSearchResponseData={setSearchResponseData}
             />
           );
         })}
