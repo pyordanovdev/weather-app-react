@@ -1,5 +1,7 @@
 import convertKelvinToCelsius from "../Utils/convertKelvinToCelsius";
 import { useEffect, useState } from "react";
+import SlickSlider from "./SlickSlider";
+
 import {
   FaWater,
   FaWind,
@@ -8,7 +10,6 @@ import {
   FaFan,
 } from "react-icons/fa";
 import LocationMap from "./LocationMap";
-import DisplayForecastData from "./DisplayForecastData";
 import get3HourForecastFor5Days from "../Utils/get3HourForecastFor5Days";
 import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsIntoSingleObject";
 
@@ -20,6 +21,7 @@ import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsI
  */
 function LocationWeatherDataPanel({ locationWeatherData }) {
   const [fiveDayForecastData, setfiveDayForecastData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const iconStylesObject = {
     fontSize: "25px",
     color: "#007bff",
@@ -43,6 +45,7 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
       );
       console.log(categorizedDataItems);
       setfiveDayForecastData(categorizedDataItems);
+      setIsLoading(false);
     };
     fetchAndCategorizeData();
   }, [locationWeatherData.coord.lat, locationWeatherData.coord.lon]);
@@ -93,11 +96,11 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
               </li>
               <li>
                 <FaTemperatureHigh style={iconStylesObject} />
-                Temp. Max:{" "}
+                Max Temp:{" "}
                 {convertKelvinToCelsius(locationWeatherData.main.temp_max)}°C
               </li>
               <li>
-                <FaTemperatureLow style={iconStylesObject} /> Temp. Min:{" "}
+                <FaTemperatureLow style={iconStylesObject} /> Min Temp:{" "}
                 {convertKelvinToCelsius(locationWeatherData.main.temp_min)}°C
               </li>
               <li>
@@ -117,8 +120,10 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
         </div>
       </div>
       <h2>3 hour forecast: 5 days</h2>
-      {fiveDayForecastData && (
-        <DisplayForecastData forecastDataObject={fiveDayForecastData} />
+      {isLoading ? (
+        <p className='loading'>Loading forecast data...</p>
+      ) : (
+        <SlickSlider dataObject={fiveDayForecastData} />
       )}
     </div>
   );

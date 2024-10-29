@@ -36,7 +36,7 @@ function SearchForm({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         ></input>
-        {isLoading ? <p>Loading, please wait...</p> : ""}
+        {isLoading ? <p className='loading'>Loading, please wait...</p> : ""}
         {searchResponseData && !isLoading && (
           <SearchDropdownLocations
             setSearchResponseData={setSearchResponseData}
