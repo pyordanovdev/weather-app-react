@@ -1,4 +1,13 @@
 import getCurrentHour from "../Utils/getCurrentHour";
+/**
+ * A functional component that displays a greeting message
+ * based on the current hour of the day.
+ * It fetches the current hour using the getCurrentHour utility function
+ * and determines whether to display a "Good Morning", "Good Afternoon",
+ * or "Good Evening" message.
+ *
+ * @returns {JSX.Element} A div containing an h1 element with a greeting message.
+ */
 function Header() {
   const currentHour = getCurrentHour();
   let message = "";

@@ -12,6 +12,12 @@ import DisplayForecastData from "./DisplayForecastData";
 import get3HourForecastFor5Days from "../Utils/get3HourForecastFor5Days";
 import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsIntoSingleObject";
 
+/**
+ * A React component that displays the current weather data and 3 hour forecast data for 5 days for a given location.
+ *
+ * @param {object} locationWeatherData - An object containing the current weather data for the location.
+ * @returns {JSX.Element} A JSX element that displays the current weather data and 3 hour forecast data for 5 days for the given location.
+ */
 function LocationWeatherDataPanel({ locationWeatherData }) {
   const [fiveDayForecastData, setfiveDayForecastData] = useState(null);
   const iconStylesObject = {
@@ -19,6 +25,13 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
     color: "#007bff",
   };
   useEffect(() => {
+    /**
+     * Fetches the 3-hour forecast data for the next 5 days using the given latitude and longitude from the
+     * locationWeatherData object, categorizes the data by date, and updates the fiveDayForecastData state.
+     * Utilizes the get3HourForecastFor5Days utility function to retrieve the forecast data and the
+     * categorizeArrayItemsIntoSingleObject function to organize the data into categorizedDataItems.
+     * Logs the categorized data to the console.
+     */
     const fetchAndCategorizeData = async () => {
       const fetchedDataForecast = await get3HourForecastFor5Days(
         locationWeatherData.coord.lat,

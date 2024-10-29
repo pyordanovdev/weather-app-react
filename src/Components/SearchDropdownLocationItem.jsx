@@ -1,4 +1,20 @@
 import convertKelvinToCelsius from "../Utils/convertKelvinToCelsius";
+/**
+ * A component that represents a single location item in the search dropdown.
+ * When clicked, it sets the weather data for the selected location and clears
+ * the search response data.
+ *
+ * @param {object} searchResponseItem - An object containing the data for a
+ *                                       specific search result location.
+ * @param {function} setLocationWeatherData - A function to update the state
+ *                                            with the weather data of the
+ *                                            selected location.
+ * @param {function} setSearchResponseData - A function to update the state
+ *                                           with the search response data.
+ * @returns {JSX.Element} A list item element representing a city with its
+ *                        name, country, temperature, weather icon, and
+ *                        coordinates.
+ */
 function SearchDropdownLocationItem({
   searchResponseItem,
   setLocationWeatherData,

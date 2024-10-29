@@ -7,6 +7,14 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+/**
+ * A React component that displays a table with 3-hour forecast data for 5 days.
+ *
+ * @param {object} forecastData - An object containing the 3-hour forecast data
+ *                                for 5 days.
+ * @returns {JSX.Element} A JSX element that displays a table with 3-hour forecast
+ *                        data for 5 days.
+ */
 function TableForecast({ forecastData }) {
   const rows = [
     { id: 1, name: "Task 1", deadline: "2022-12-31", status: "Complete" },
