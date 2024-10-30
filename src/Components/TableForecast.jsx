@@ -37,7 +37,7 @@ function TableForecast({ forecastData }) {
               <TableCell key={index}>
                 <img
                   src={`
-            /weather-icons/${data.weather[0].main.toLowerCase()}.png`}
+            https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
                   alt='Weather Icon'
                 />
                 {data.weather[0].description}

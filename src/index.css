@@ -30,7 +30,11 @@ select,
 textarea,
 ul,
 ol,
-div {
+div,
+table,
+td,
+th,
+tr {
   font-family: "Poppins", sans-serif !important;
 }
 h1 {
@@ -57,7 +61,7 @@ h4 {
 .weather-app-container {
   max-width: 1000px;
   display: flex;
-  width: 900px;
+  width: 1000px;
   margin: 0 auto;
   flex-flow: column nowrap;
 }
@@ -74,6 +78,7 @@ h4 {
   display: flex;
   flex-flow: column nowrap;
   position: relative;
+  text-align: center;
 }
 
 ul.search-dropdown-menu {
@@ -142,8 +147,9 @@ li.single-city-search {
 li.single-city-search:hover {
   border: 2px solid #3395ff;
 }
-span.weather-icon-state__single-city-search img {
-  width: 28px;
+span.weather-icon-state__single-city-search img,
+.location-weather-data-panel img {
+  width: 50px;
 }
 span.city-name__single-city-search img {
   width: 20px;
@@ -176,9 +182,6 @@ li.single-city-search span {
   gap: 10px;
   margin: 0;
 }
-.location-weather-data-panel img {
-  width: 40px;
-}
 .location-weather-data-panel div {
   font-size: 20px;
 }
@@ -193,7 +196,7 @@ li.single-city-search span {
 .other-data__current-location ul {
   list-style: none;
   padding: 0;
-  margin: 15px 0 0 0;
+  margin: 15px 0;
 }
 .other-data__current-location ul li {
   display: flex;
@@ -208,4 +211,19 @@ li.single-city-search span {
 }
 .leaflet-control-attribution {
   display: none !important;
+}
+
+/* Weather Forecast - Data Panel */
+
+.h2__current-location {
+  font-weight: 600;
+  margin: 5px 0;
+}
+.h3__current-location {
+  margin: 5px 0;
+  font-weight: 500;
+}
+.h4__current-location {
+  margin: 5px 0;
+  font-weight: 400;
 }

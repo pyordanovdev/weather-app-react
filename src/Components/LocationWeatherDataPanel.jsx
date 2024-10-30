@@ -26,6 +26,7 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
     fontSize: "25px",
     color: "#007bff",
   };
+  const openWeatherImageURL = import.meta.env.VITE_OPENWEATHER_IMG_URL;
   useEffect(() => {
     /**
      * Fetches the 3-hour forecast data for the next 5 days using the given latitude and longitude from the
@@ -54,24 +55,24 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
     <div className='location-weather-data-panel current-location'>
       <div className='flex-row'>
         <div className='col-6'>
-          <h2 className='location-heading__current-location'>
+          <h2 className='location-heading__current-location h2__current-location'>
             {locationWeatherData.name}, {locationWeatherData.sys.country}{" "}
             <img
               src={`/country-flags/${locationWeatherData.sys.country.toLowerCase()}.svg`}
               alt={locationWeatherData.sys.country + " flag"}
             />
           </h2>
-          <div className='current-weather__current-location'>
+          <div className='current-weather__current-location h2__current-location'>
             <img
               src={`
-            /weather-icons/${locationWeatherData.weather[0].main.toLowerCase()}.png`}
+            ${openWeatherImageURL}${locationWeatherData.weather[0].icon}@2x.png`}
               alt='Weather Icon'
             />
             {convertKelvinToCelsius(locationWeatherData.main.temp).toFixed(0)}
             °C
           </div>
           <div className='feels-like-forecast'>
-            <strong>
+            <h3 className='h3__current-location'>
               Feels like{" "}
               {convertKelvinToCelsius(
                 locationWeatherData.main.feels_like
@@ -82,7 +83,7 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
                 .toUpperCase() +
                 locationWeatherData.weather[0].description.slice(1)}
               .
-            </strong>
+            </h3>
           </div>
           <div className='other-data__current-location'>
             <ul>
@@ -119,7 +120,7 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
           />
         </div>
       </div>
-      <h2>3 hour forecast: 5 days</h2>
+      <h2 className='h2__current-location'>3 hour forecast: 5 days</h2>
       {isLoading ? (
         <p className='loading'>Loading forecast data...</p>
       ) : (

@@ -20,6 +20,7 @@ function SearchDropdownLocationItem({
   setLocationWeatherData,
   setSearchResponseData,
 }) {
+  const openWeatherImageURL = import.meta.env.VITE_OPENWEATHER_IMG_URL;
   function handleClick(e) {
     e.preventDefault();
     setLocationWeatherData(searchResponseItem);
@@ -46,7 +47,7 @@ function SearchDropdownLocationItem({
       <span className='weather-icon-state__single-city-search'>
         <img
           src={`
-            /weather-icons/${searchResponseItem.weather[0].main.toLowerCase()}.png`}
+            ${openWeatherImageURL}${searchResponseItem.weather[0].icon}@2x.png`}
           alt='Weather Icon'
         />
       </span>

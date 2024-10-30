@@ -10,7 +10,7 @@ import transformDateIntoWeekday from "../Utils/transformDateIntoWeekday";
 function DisplayForecastData({ date, forecastDataObject }) {
   return (
     <div className='forecast-data'>
-      <h4>
+      <h4 className='h4__current-location'>
         {transformDateIntoWeekday(date)} - {date}
       </h4>
       <TableForecast forecastData={forecastDataObject} />
