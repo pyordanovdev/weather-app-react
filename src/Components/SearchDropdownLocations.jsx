@@ -12,6 +12,7 @@ function SearchDropdownLocations({
   searchResponseData,
   setLocationWeatherData,
   setSearchResponseData,
+  isUsingCurrentLocation,
 }) {
   return (
     <ul className='search-dropdown-menu'>
@@ -24,6 +25,7 @@ function SearchDropdownLocations({
               key={item.id}
               setLocationWeatherData={setLocationWeatherData}
               setSearchResponseData={setSearchResponseData}
+              isUsingCurrentLocation={isUsingCurrentLocation}
             />
           );
         })}

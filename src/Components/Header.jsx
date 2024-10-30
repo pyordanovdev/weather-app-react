@@ -1,4 +1,7 @@
 import getCurrentHour from "../Utils/getCurrentHour";
+import Button from "./Button";
+import { FaMapMarkerAlt, FaCircle } from "react-icons/fa";
+
 /**
  * A functional component that displays a greeting message
  * based on the current hour of the day.
@@ -8,7 +11,7 @@ import getCurrentHour from "../Utils/getCurrentHour";
  *
  * @returns {JSX.Element} A div containing an h1 element with a greeting message.
  */
-function Header() {
+function Header({ usingCurrentLocation, handleClickUseLocation }) {
   const currentHour = getCurrentHour();
   let message = "";
   if (currentHour < 12) {
@@ -20,7 +23,21 @@ function Header() {
   }
   return (
     <div className='header'>
-      <h1>{message}, traveller!</h1>
+      <div className='col-3'>
+        {usingCurrentLocation ? (
+          <p className='status-box'>
+            <FaCircle color={"#0f0"} /> Using current location...
+          </p>
+        ) : (
+          <Button onClickHandler={handleClickUseLocation}>
+            Use my current location <FaMapMarkerAlt />
+          </Button>
+        )}
+      </div>
+      <div className='col-3'>
+        <h1>{message}, traveller!</h1>
+      </div>
+      <div className='col-3'>some other info</div>
     </div>
   );
 }

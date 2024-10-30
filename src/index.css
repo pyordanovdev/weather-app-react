@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --site-width: 1200px;
+}
 body {
   margin: 0;
   padding: 0;
@@ -38,7 +41,7 @@ tr {
   font-family: "Poppins", sans-serif !important;
 }
 h1 {
-  margin-top: 0;
+  margin: 0;
   text-align: center;
 }
 h4 {
@@ -59,11 +62,20 @@ h4 {
   padding: 20px 0;
 }
 .weather-app-container {
-  max-width: 1000px;
+  max-width: var(--site-width);
   display: flex;
-  width: 1000px;
+  width: var(--site-width);
   margin: 0 auto;
   flex-flow: column nowrap;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  gap: 30px;
 }
 
 .search-form {
@@ -121,9 +133,26 @@ button.primary {
   transition: background-color 0.3s ease;
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+button i,
+button svg {
+  font-size: 16px;
 }
 button.primary:hover {
   background-color: #3395ff;
+}
+.status-box {
+  margin: 0;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
 }
 
 li.single-city-search {
@@ -159,6 +188,7 @@ li.single-city-search span {
   align-items: center;
   gap: 6px;
   justify-content: flex-start;
+  text-align: left;
 }
 .location-weather-data-panel {
   background-color: #ffffff30;
@@ -224,6 +254,6 @@ li.single-city-search span {
   font-weight: 500;
 }
 .h4__current-location {
-  margin: 5px 0;
+  margin: 5px 0 15px 0;
   font-weight: 400;
 }

@@ -20,7 +20,7 @@ import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsI
  * @returns {JSX.Element} A JSX element that displays the current weather data and 3 hour forecast data for 5 days for the given location.
  */
 function LocationWeatherDataPanel({ locationWeatherData }) {
-  const [fiveDayForecastData, setfiveDayForecastData] = useState(null);
+  const [fiveDayForecastData, setFiveDayForecastData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const iconStylesObject = {
     fontSize: "25px",
@@ -45,7 +45,7 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
         "dt_txt"
       );
       console.log(categorizedDataItems);
-      setfiveDayForecastData(categorizedDataItems);
+      setFiveDayForecastData(categorizedDataItems);
       setIsLoading(false);
     };
     fetchAndCategorizeData();

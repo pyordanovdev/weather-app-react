@@ -23,6 +23,7 @@ function SearchForm({
   searchResponseData,
   setSearchResponseData,
   setLocationWeatherData,
+  isUsingCurrentLocation,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +50,7 @@ function SearchForm({
             setSearchResponseData={setSearchResponseData}
             searchResponseData={searchResponseData}
             setLocationWeatherData={setLocationWeatherData}
+            isUsingCurrentLocation={isUsingCurrentLocation}
           />
         )}
       </div>
