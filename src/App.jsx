@@ -18,6 +18,7 @@ function App() {
   const [usingCurrentLocation, isUsingCurrentLocation] = useState(false);
   const fetchLocationData = async () => {
     try {
+      // setLocationWeatherData(null);
       const userLocation = await getUserCurrentLocation();
       console.log(userLocation);
       const locationWeatherDataFromCoords =

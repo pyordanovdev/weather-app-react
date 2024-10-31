@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 :root {
-  --site-width: 1200px;
+  --site-width: 1100px;
 }
 body {
   margin: 0;
@@ -154,6 +154,11 @@ button.primary:hover {
   align-items: center;
   gap: 10px;
 }
+.status-box svg {
+  transform: scale(1);
+  animation: pulse 2s infinite;
+  border-radius: 50%;
+}
 
 li.single-city-search {
   display: flex;
@@ -256,4 +261,21 @@ li.single-city-search span {
 .h4__current-location {
   margin: 5px 0 15px 0;
   font-weight: 400;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }

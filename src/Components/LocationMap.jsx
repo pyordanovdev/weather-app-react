@@ -1,5 +1,6 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
 
 /**
  * A component that renders a map of a given location using the
@@ -15,6 +16,18 @@ import "leaflet/dist/leaflet.css";
  */
 function LocationMap({ lat, long, popupText, zoom }) {
   const position = [lat, long];
+  function PanToLocation({ lat, long }) {
+    const map = useMap();
+
+    useEffect(() => {
+      map.flyTo([lat, long], map.getZoom(), {
+        animate: true,
+        duration: 1.5,
+      });
+    }, [lat, long, map]);
+
+    return null;
+  }
   return (
     <MapContainer center={position} zoom={zoom} scrollWheelZoom={false}>
       <TileLayer
@@ -24,6 +37,7 @@ function LocationMap({ lat, long, popupText, zoom }) {
       <Marker position={position}>
         <Popup>{popupText}</Popup>
       </Marker>
+      <PanToLocation lat={lat} long={long} />
     </MapContainer>
   );
 }
