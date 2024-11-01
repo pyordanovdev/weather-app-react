@@ -28,10 +28,21 @@ To get started with this project:
 
 1. Clone the repository to your local machine.
 2. Open a terminal, navigate to the project directory, and install dependencies:
+
    ```bash
    npm install
    ```
-3. Add your OpenWeather API key to the .env file: VITE_OPENWEATHER_API_KEY=your_api_key_here
-4. Run the app in development mode: npm run dev
+
+3. Add your OpenWeather API key to the .env file:
+
+   ```bash
+   VITE_OPENWEATHER_API_KEY=your_api_key_here
+   ```
+
+4. Run the app in development mode:
+
+```bash
+   npm run dev
+```
 
 The app should now be running locally, and you can open it in your browser to start exploring the features!
