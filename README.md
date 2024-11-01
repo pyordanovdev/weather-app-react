@@ -45,4 +45,6 @@ To get started with this project:
    npm run dev
 ```
 
+## 👨‍💻 Find the app live at https://react-weather-app-vite.netlify.app/
+
 The app should now be running locally, and you can open it in your browser to start exploring the features!
