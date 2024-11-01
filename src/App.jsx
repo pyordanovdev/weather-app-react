@@ -16,6 +16,7 @@ function App() {
   const [searchResponseData, setSearchResponseData] = useState(null);
   const [locationWeatherData, setLocationWeatherData] = useState(null);
   const [usingCurrentLocation, isUsingCurrentLocation] = useState(false);
+  const [favoriteLocations, setFavoriteLocations] = useState([]);
   const fetchLocationData = async () => {
     try {
       // setLocationWeatherData(null);
@@ -41,6 +42,10 @@ function App() {
         <Header
           usingCurrentLocation={usingCurrentLocation}
           handleClickUseLocation={fetchLocationData}
+          favoriteLocations={favoriteLocations}
+          setSearchResponseData={setSearchResponseData}
+          setLocationWeatherData={setLocationWeatherData}
+          isUsingCurrentLocation={isUsingCurrentLocation}
         />
         <SearchForm
           searchResponseData={searchResponseData}
@@ -49,7 +54,11 @@ function App() {
           isUsingCurrentLocation={isUsingCurrentLocation}
         />
         {!searchResponseData && locationWeatherData && (
-          <LocationWeatherDataPanel locationWeatherData={locationWeatherData} />
+          <LocationWeatherDataPanel
+            locationWeatherData={locationWeatherData}
+            setFavoriteLocations={setFavoriteLocations}
+            favoriteLocations={favoriteLocations}
+          />
         )}
       </div>
     </div>

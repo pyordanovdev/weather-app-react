@@ -1,6 +1,7 @@
 import convertKelvinToCelsius from "../Utils/convertKelvinToCelsius";
 import { useEffect, useState } from "react";
 import SlickSlider from "./SlickSlider";
+import Button from "./Button";
 
 import {
   FaWater,
@@ -8,6 +9,7 @@ import {
   FaTemperatureHigh,
   FaTemperatureLow,
   FaFan,
+  FaHeart,
 } from "react-icons/fa";
 import LocationMap from "./LocationMap";
 import get3HourForecastFor5Days from "../Utils/get3HourForecastFor5Days";
@@ -19,9 +21,16 @@ import categorizeArrayItemsIntoSingleObject from "../Utils/categorizeArrayItemsI
  * @param {object} locationWeatherData - An object containing the current weather data for the location.
  * @returns {JSX.Element} A JSX element that displays the current weather data and 3 hour forecast data for 5 days for the given location.
  */
-function LocationWeatherDataPanel({ locationWeatherData }) {
+function LocationWeatherDataPanel({
+  locationWeatherData,
+  favoriteLocations,
+  setFavoriteLocations,
+}) {
   const [fiveDayForecastData, setFiveDayForecastData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  let isFavorite = favoriteLocations.some(
+    (favoriteLocation) => favoriteLocation.id === locationWeatherData.id
+  );
   const iconStylesObject = {
     fontSize: "25px",
     color: "#007bff",
@@ -50,11 +59,42 @@ function LocationWeatherDataPanel({ locationWeatherData }) {
     };
     fetchAndCategorizeData();
   }, [locationWeatherData.coord.lat, locationWeatherData.coord.lon]);
-
+  /**
+   * Handles the favorite button click event.
+   * If the location is already in the favorites list, removes it.
+   * If the location is not in the favorites list, adds it.
+   */
+  function handleFavoriteButtonClick() {
+    if (isFavorite) {
+      setFavoriteLocations((prevFavoriteLocations) =>
+        prevFavoriteLocations.filter(
+          (favoriteLocation) => favoriteLocation.id !== locationWeatherData.id
+        )
+      );
+      isFavorite = false;
+    } else {
+      isFavorite = true;
+      setFavoriteLocations((prevFavoriteLocations) => [
+        ...prevFavoriteLocations,
+        locationWeatherData,
+      ]);
+    }
+  }
   return (
     <div className='location-weather-data-panel current-location'>
       <div className='flex-row'>
         <div className='col-6'>
+          <Button
+            onClickHandler={handleFavoriteButtonClick}
+            style={"secondary"}
+          >
+            {isFavorite ? (
+              <span className='red'>Remove from favorite locations</span>
+            ) : (
+              "Add as a favorite location"
+            )}
+            <FaHeart style={iconStylesObject} size={15} />
+          </Button>
           <h2 className='location-heading__current-location h2__current-location'>
             {locationWeatherData.name}, {locationWeatherData.sys.country}{" "}
             <img

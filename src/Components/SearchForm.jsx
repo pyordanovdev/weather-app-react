@@ -54,7 +54,7 @@ function SearchForm({
           />
         )}
       </div>
-      <Button>Search city</Button>
+      <Button style={"primary"}>Search city</Button>
     </form>
   );
 

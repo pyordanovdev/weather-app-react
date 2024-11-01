@@ -139,6 +139,25 @@ button.primary {
   align-items: center;
   gap: 5px;
 }
+button.secondary {
+  background-color: #e6f2ff;
+  color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.red {
+  color: red;
+}
 button i,
 button svg {
   font-size: 16px;
@@ -261,6 +280,58 @@ li.single-city-search span {
 .h4__current-location {
   margin: 5px 0 15px 0;
   font-weight: 400;
+}
+
+/* Favorite Locations */
+.fav-locations-wrapper {
+  position: relative;
+}
+.fav-locations-button {
+  display: inline-flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid #fff;
+  padding: 10px;
+  border-radius: 50px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.fav-locations__list {
+  position: absolute;
+  top: 100%;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #000;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 10px;
+}
+.fav-locations-button svg {
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 500px;
+  font-size: 20px;
+}
+.fav-locations-text {
+  position: relative;
+}
+.fav-locations-number {
+  background-color: #f00;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1em;
 }
 
 @keyframes pulse {

@@ -1,6 +1,6 @@
-function Button({ children, onClickHandler }) {
+function Button({ children, onClickHandler, style }) {
   return (
-    <button className='primary' onClick={onClickHandler}>
+    <button className={style} onClick={onClickHandler}>
       {children}
     </button>
   );

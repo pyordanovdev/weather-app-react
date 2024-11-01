@@ -20,6 +20,7 @@ function SearchDropdownLocationItem({
   setLocationWeatherData,
   setSearchResponseData,
   isUsingCurrentLocation,
+  fullRender = true,
 }) {
   const openWeatherImageURL = import.meta.env.VITE_OPENWEATHER_IMG_URL;
   function handleClick(e) {
@@ -42,20 +43,24 @@ function SearchDropdownLocationItem({
           alt={searchResponseItem.sys.country + " flag"}
         />
       </span>
-      <span className='degrees__single-city-search'>
-        {convertKelvinToCelsius(searchResponseItem.main.temp).toFixed(0)}
-        °C
-      </span>
-      <span className='weather-icon-state__single-city-search'>
-        <img
-          src={`
+      {fullRender && (
+        <>
+          <span className='degrees__single-city-search'>
+            {convertKelvinToCelsius(searchResponseItem.main.temp).toFixed(0)}
+            °C
+          </span>
+          <span className='weather-icon-state__single-city-search'>
+            <img
+              src={`
             ${openWeatherImageURL}${searchResponseItem.weather[0].icon}@2x.png`}
-          alt='Weather Icon'
-        />
-      </span>
-      <span className='coordinates__single-city-search'>
-        {searchResponseItem.coord.lat}, {searchResponseItem.coord.lon}
-      </span>
+              alt='Weather Icon'
+            />
+          </span>
+          <span className='coordinates__single-city-search'>
+            {searchResponseItem.coord.lat}, {searchResponseItem.coord.lon}
+          </span>
+        </>
+      )}
     </li>
   );
 }

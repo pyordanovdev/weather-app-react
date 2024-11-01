@@ -1,4 +1,5 @@
 import getCurrentHour from "../Utils/getCurrentHour";
+import FavoriteLocations from "./FavouriteLocations";
 import Button from "./Button";
 import { FaMapMarkerAlt, FaCircle } from "react-icons/fa";
 
@@ -11,7 +12,14 @@ import { FaMapMarkerAlt, FaCircle } from "react-icons/fa";
  *
  * @returns {JSX.Element} A div containing an h1 element with a greeting message.
  */
-function Header({ usingCurrentLocation, handleClickUseLocation }) {
+function Header({
+  usingCurrentLocation,
+  handleClickUseLocation,
+  favoriteLocations,
+  setLocationWeatherData,
+  setSearchResponseData,
+  isUsingCurrentLocation,
+}) {
   const currentHour = getCurrentHour();
   let message = "";
   if (currentHour < 12) {
@@ -29,7 +37,7 @@ function Header({ usingCurrentLocation, handleClickUseLocation }) {
             <FaCircle color={"#0f0"} /> Using current location...
           </p>
         ) : (
-          <Button onClickHandler={handleClickUseLocation}>
+          <Button onClickHandler={handleClickUseLocation} style={"primary"}>
             Use my current location <FaMapMarkerAlt />
           </Button>
         )}
@@ -37,7 +45,14 @@ function Header({ usingCurrentLocation, handleClickUseLocation }) {
       <div className='col-3'>
         <h1>{message}, traveller!</h1>
       </div>
-      <div className='col-3'>some other info</div>
+      <div className='col-3'>
+        <FavoriteLocations
+          favoriteLocations={favoriteLocations}
+          setLocationWeatherData={setLocationWeatherData}
+          setSearchResponseData={setSearchResponseData}
+          isUsingCurrentLocation={isUsingCurrentLocation}
+        />
+      </div>
     </div>
   );
 }
