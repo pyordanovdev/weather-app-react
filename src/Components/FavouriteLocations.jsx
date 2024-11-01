@@ -7,10 +7,10 @@ function FavoriteLocations({
   setLocationWeatherData,
   setSearchResponseData,
   isUsingCurrentLocation,
+  setCurrentLocation,
 }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  console.log("Fav locations");
-  console.log(favoriteLocations);
+  // console.log(favoriteLocations);
   return (
     <div
       className='fav-locations-wrapper'
@@ -37,6 +37,7 @@ function FavoriteLocations({
                     setSearchResponseData={setSearchResponseData}
                     isUsingCurrentLocation={isUsingCurrentLocation}
                     fullRender={false}
+                    setCurrentLocation={setCurrentLocation}
                   />
                 );
               })}

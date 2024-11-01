@@ -9,9 +9,10 @@
  */
 export default async function getLocationWeatherDataFromCoords(lat, long) {
   const apiKey = import.meta.env.VITE__OPENWEATHER_API;
+  const coordsAPIURLCall = import.meta.env.VITE_OPENWEATHER_COORDS_CALL_URL;
   try {
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&appid=${apiKey}`
+      `${coordsAPIURLCall}?lat=${lat}&lon=${long}&appid=${apiKey}`
     );
     if (!res.ok) throw new Error("Failed to fetch data");
     const data = await res.json();

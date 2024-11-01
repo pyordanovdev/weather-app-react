@@ -25,12 +25,11 @@ function LocationWeatherDataPanel({
   locationWeatherData,
   favoriteLocations,
   setFavoriteLocations,
+  currentLocation,
 }) {
   const [fiveDayForecastData, setFiveDayForecastData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  let isFavorite = favoriteLocations.some(
-    (favoriteLocation) => favoriteLocation.id === locationWeatherData.id
-  );
+  const [isFavorite, setIsFavorite] = useState(false);
   const iconStylesObject = {
     fontSize: "25px",
     color: "#007bff",
@@ -53,12 +52,19 @@ function LocationWeatherDataPanel({
         fetchedDataForecast.list,
         "dt_txt"
       );
-      console.log(categorizedDataItems);
+      // console.log(categorizedDataItems);
       setFiveDayForecastData(categorizedDataItems);
       setIsLoading(false);
     };
     fetchAndCategorizeData();
-  }, [locationWeatherData.coord.lat, locationWeatherData.coord.lon]);
+    setIsFavorite(
+      favoriteLocations.some(
+        (favLoc) =>
+          favLoc.id === locationWeatherData.id &&
+          favLoc.name === locationWeatherData.name
+      )
+    );
+  }, [locationWeatherData, favoriteLocations]);
   /**
    * Handles the favorite button click event.
    * If the location is already in the favorites list, removes it.
@@ -66,19 +72,30 @@ function LocationWeatherDataPanel({
    */
   function handleFavoriteButtonClick() {
     if (isFavorite) {
-      setFavoriteLocations((prevFavoriteLocations) =>
-        prevFavoriteLocations.filter(
+      setFavoriteLocations((prevFavoriteLocations) => {
+        const newFavoriteLocations = prevFavoriteLocations.filter(
           (favoriteLocation) => favoriteLocation.id !== locationWeatherData.id
-        )
-      );
-      isFavorite = false;
+        );
+        localStorage.setItem(
+          "favoriteLocations",
+          JSON.stringify(newFavoriteLocations)
+        );
+        return newFavoriteLocations;
+      });
     } else {
-      isFavorite = true;
-      setFavoriteLocations((prevFavoriteLocations) => [
-        ...prevFavoriteLocations,
-        locationWeatherData,
-      ]);
+      setFavoriteLocations((prevFavoriteLocations) => {
+        const newFavoriteLocations = [
+          ...prevFavoriteLocations,
+          locationWeatherData,
+        ];
+        localStorage.setItem(
+          "favoriteLocations",
+          JSON.stringify(newFavoriteLocations)
+        );
+        return newFavoriteLocations;
+      });
     }
+    setIsFavorite((prev) => !prev);
   }
   return (
     <div className='location-weather-data-panel current-location'>
@@ -88,13 +105,17 @@ function LocationWeatherDataPanel({
             onClickHandler={handleFavoriteButtonClick}
             style={"secondary"}
           >
-            {isFavorite ? (
-              <span className='red'>Remove from favorite locations</span>
-            ) : (
-              "Add as a favorite location"
-            )}
+            {isFavorite
+              ? "Remove from favorite locations"
+              : "Add as a favorite location"}
             <FaHeart style={iconStylesObject} size={15} />
           </Button>
+          {currentLocation === locationWeatherData.id && (
+            <span className='label label--success'>Current Location</span>
+          )}
+          {isFavorite && (
+            <span className='label label--info'>Favorite Location</span>
+          )}
           <h2 className='location-heading__current-location h2__current-location'>
             {locationWeatherData.name}, {locationWeatherData.sys.country}{" "}
             <img

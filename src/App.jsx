@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchForm from "./Components/SearchForm";
 import Header from "./Components/Header";
-import LocationWeatherDataPanel from "./Components/locationWeatherDataPanel";
+import LocationWeatherDataPanel from "./Components/LocationWeatherDataPanel";
 import getUserCurrentLocation from "./Utils/getUserCurrentLocation";
 import getLocationWeatherDataFromCoords from "./Utils/getLocationWeatherDataFromCoords";
 /**
@@ -15,22 +15,27 @@ import getLocationWeatherDataFromCoords from "./Utils/getLocationWeatherDataFrom
 function App() {
   const [searchResponseData, setSearchResponseData] = useState(null);
   const [locationWeatherData, setLocationWeatherData] = useState(null);
-  const [usingCurrentLocation, isUsingCurrentLocation] = useState(false);
-  const [favoriteLocations, setFavoriteLocations] = useState([]);
+  const [currentLocation, setCurrentLocation] = useState(null);
+  const [favoriteLocations, setFavoriteLocations] = useState(
+    localStorage.getItem("favoriteLocations")
+      ? JSON.parse(localStorage.getItem("favoriteLocations"))
+      : []
+  );
   const fetchLocationData = async () => {
     try {
       // setLocationWeatherData(null);
       const userLocation = await getUserCurrentLocation();
-      console.log(userLocation);
+      // console.log(userLocation);
       const locationWeatherDataFromCoords =
         await getLocationWeatherDataFromCoords(
           userLocation.lat,
           userLocation.long
         );
       setLocationWeatherData(locationWeatherDataFromCoords);
-      isUsingCurrentLocation(true);
+      setCurrentLocation(locationWeatherDataFromCoords.id);
     } catch (err) {
       console.log(err);
+      alert("Failed to get location, please try again");
     }
   };
   useEffect(() => {
@@ -40,24 +45,25 @@ function App() {
     <div className='weather-app'>
       <div className='weather-app-container'>
         <Header
-          usingCurrentLocation={usingCurrentLocation}
           handleClickUseLocation={fetchLocationData}
           favoriteLocations={favoriteLocations}
           setSearchResponseData={setSearchResponseData}
           setLocationWeatherData={setLocationWeatherData}
-          isUsingCurrentLocation={isUsingCurrentLocation}
+          currentLocation={currentLocation}
+          setCurrentLocation={setCurrentLocation}
         />
         <SearchForm
           searchResponseData={searchResponseData}
           setSearchResponseData={setSearchResponseData}
           setLocationWeatherData={setLocationWeatherData}
-          isUsingCurrentLocation={isUsingCurrentLocation}
+          setCurrentLocation={setCurrentLocation}
         />
         {!searchResponseData && locationWeatherData && (
           <LocationWeatherDataPanel
             locationWeatherData={locationWeatherData}
             setFavoriteLocations={setFavoriteLocations}
             favoriteLocations={favoriteLocations}
+            currentLocation={currentLocation}
           />
         )}
       </div>

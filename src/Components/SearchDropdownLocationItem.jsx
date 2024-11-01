@@ -19,7 +19,7 @@ function SearchDropdownLocationItem({
   searchResponseItem,
   setLocationWeatherData,
   setSearchResponseData,
-  isUsingCurrentLocation,
+  setCurrentLocation,
   fullRender = true,
 }) {
   const openWeatherImageURL = import.meta.env.VITE_OPENWEATHER_IMG_URL;
@@ -27,8 +27,8 @@ function SearchDropdownLocationItem({
     e.preventDefault();
     setLocationWeatherData(searchResponseItem);
     setSearchResponseData(null);
-    isUsingCurrentLocation(false);
-    console.log(searchResponseItem);
+    setCurrentLocation(null);
+    // console.log(searchResponseItem);
   }
   return (
     <li

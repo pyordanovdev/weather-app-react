@@ -23,7 +23,7 @@ function SearchForm({
   searchResponseData,
   setSearchResponseData,
   setLocationWeatherData,
-  isUsingCurrentLocation,
+  setCurrentLocation,
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +50,7 @@ function SearchForm({
             setSearchResponseData={setSearchResponseData}
             searchResponseData={searchResponseData}
             setLocationWeatherData={setLocationWeatherData}
-            isUsingCurrentLocation={isUsingCurrentLocation}
+            setCurrentLocation={setCurrentLocation}
           />
         )}
       </div>
@@ -82,7 +82,8 @@ function SearchForm({
           setSearchResponseData(returnedAPICallData.list);
           setSearchQuery("");
           setIsLoading(false);
-          console.log(returnedAPICallData);
+          setCurrentLocation(null);
+          // console.log(returnedAPICallData);
         }, 500);
       }
     } catch (err) {

@@ -155,6 +155,18 @@ button.secondary {
   align-items: center;
   gap: 5px;
 }
+button.underline {
+  text-decoration: underline;
+  background-color: transparent;
+  color: #000;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+}
 .red {
   color: red;
 }
@@ -332,6 +344,22 @@ li.single-city-search span {
   font-size: 12px;
   font-weight: 600;
   line-height: 1em;
+}
+.label {
+  padding: 3px 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+  border-radius: 50px;
+  display: inline-flex;
+  margin: 10px 10px 0 0;
+}
+.label--success {
+  background-color: #0f0;
+}
+.label--info {
+  background-color: #00f;
+  color: #fff;
 }
 
 @keyframes pulse {

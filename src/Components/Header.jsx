@@ -13,12 +13,13 @@ import { FaMapMarkerAlt, FaCircle } from "react-icons/fa";
  * @returns {JSX.Element} A div containing an h1 element with a greeting message.
  */
 function Header({
-  usingCurrentLocation,
   handleClickUseLocation,
   favoriteLocations,
   setLocationWeatherData,
   setSearchResponseData,
   isUsingCurrentLocation,
+  currentLocation,
+  setCurrentLocation,
 }) {
   const currentHour = getCurrentHour();
   let message = "";
@@ -29,12 +30,21 @@ function Header({
   } else {
     message = "Good Evening";
   }
+  function handleStopUsingCurrentLocation() {
+    setCurrentLocation(null);
+  }
   return (
     <div className='header'>
       <div className='col-3'>
-        {usingCurrentLocation ? (
+        {currentLocation !== null ? (
           <p className='status-box'>
-            <FaCircle color={"#0f0"} /> Using current location...
+            <FaCircle color={"#0f0"} /> Using current location...{" "}
+            <Button
+              onClickHandler={handleStopUsingCurrentLocation}
+              style={"underline"}
+            >
+              Stop
+            </Button>
           </p>
         ) : (
           <Button onClickHandler={handleClickUseLocation} style={"primary"}>
@@ -51,6 +61,7 @@ function Header({
           setLocationWeatherData={setLocationWeatherData}
           setSearchResponseData={setSearchResponseData}
           isUsingCurrentLocation={isUsingCurrentLocation}
+          setCurrentLocation={setCurrentLocation}
         />
       </div>
     </div>
